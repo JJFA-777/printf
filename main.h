@@ -7,7 +7,12 @@
 
 int _printf(const char *format, ...);
 int buffer_len(const char *format, ...);
-int _strlen(char *);
+int _strlen(char *c);
+int _strlenc(const char *c);
 int _putchar(char c);
+int print_num(int);
+int print_str(char *);
+int print_char(char c);
+int print_perc(void);
 
 #endif /*MAIN_H*/

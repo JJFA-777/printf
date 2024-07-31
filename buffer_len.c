@@ -9,31 +9,31 @@
 
 int buffer_len(const char *format, ...)
 {
-	int i;
+	int i, len;
 	va_list args;
-
-	len = _strlen(format);
 
 	va_start(args, format);
 
-	for (i = 0; i < len + 1; i++)
+	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%')
 		{
-			switch (format[i + 1])
+			i++;
+			switch (format[i])
 			{
 				case 's':
-					len += (_strlen(va_arg(args, char *) - 2));
+					len += _strlen(va_arg(args, char *));
 					break;
 				case 'c':
-					len -= 1;
+					len += 1;
 					break;
 				case '%':
-					len -= 1;
+					len += 1;
 					break;
 			}
 		}
+		len += 1;
 	}
-	va_end(list, args);
+	va_end(args);
 	return (len);
 }

@@ -7,17 +7,18 @@
  * Return: len of string.
  */
 
-char *print_str(va_list list)
+int print_str(char *c)
 {
 	int i = 0;
-	char *s;
 
-	s = va_arg(list, char *);
+	if (c == NULL)
+		return (0);
 
-	while (s[i] != '\0')
+	while (c[i] != '\0')
 	{
-		_putchar(s[i]);
+		_putchar(c[i]);
 		i++;
 	}
+	
 	return (i);
 }

@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
 * _printf - print anything to stdout.
@@ -9,38 +10,40 @@
 
 int _printf(const char *format, ...)
 {
-	int i = 0, len;
-	va_list args;
-	char *buffer;
+	va_list list;
+	char *str = NULL;
+	int i = 0, retval = 0;
 
-	len = buffer_len(format, ...);
+	va_start(list, format);
 
-	va_start(args, format);
-
-	buffer = malloc(sizeof(char) * len);
-
-	if (buffer == NULL)
-		return (-1);
-
-	for (i = 0; i < len + 1; i++)
-	{
+	while (format && format[i])
+	{	
 		if (format[i] == '%')
 		{
-			switch (format[i + 1])
+			i++;
+			switch (format[i])
 			{
 				case 's':
-					print_str(va_arg(arg, char *));
-					break;
-				case 'c':
-					_putchar(va_arg(arg, int));
-					break;
+					str = va_arg(list, char *);
+					if (str == NULL)
+					{
+						return (i);
+					}
+					retval += print_str(str);
+					i++;
+				break;
 				case '%':
-					_putchar('%');
-					break;
+					retval += _putchar('%');
+					i++;
+				break;
 			}
 		}
+		_putchar(format[i]);
+		i++;
+		retval++;
 	}
-	write(1, buffer, len);
-	free(buffer);
-	return (len);
+
+	va_end(list);
+
+	return (retval);
 }
