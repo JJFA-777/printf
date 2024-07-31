@@ -6,12 +6,15 @@
  *Return: Length of characters printed.
  */
 
-int print_num(int n)
+int print_num(va_list list)
 {
-	int n_cpy, len;
+	int o_num;
+	int p_ten;
+	int len;
 	unsigned int abs_num;
 
-	o_num = n;
+	o_num = va_arg(list, int);
+	p_ten = 1;
 	len = 0;
 
 	if (o_num < 0)
@@ -21,7 +24,7 @@ int print_num(int n)
 	}
 
 	else
-		abs_num = o_num;
+		abs_n = o_num;
 
 	while (abs_num / p_ten > 9)
 	{

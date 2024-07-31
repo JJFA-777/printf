@@ -3,9 +3,11 @@
 /**
  *_strlen - Calculates the length of a string argument.
  *@c: string.
+ *@list: List containing the string optional arguments
  *
  * Return: The length of the string.
  */
+
 
 int _strlen(char *c)
 {
@@ -39,5 +41,4 @@ int _strlenc(const char *c)
 		i++;
 
 	return (i);
-
 }
