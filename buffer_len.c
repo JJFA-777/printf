@@ -35,5 +35,5 @@ int buffer_len(const char *format, ...)
 		len += 1;
 	}
 	va_end(args);
-	return (len + 1);
+	return (len);
 }

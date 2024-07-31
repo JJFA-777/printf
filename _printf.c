@@ -10,48 +10,40 @@
 
 int _printf(const char *format, ...)
 {
-	int i = 0, j, len;
-	va_list args;
-	char *buffer, *str;
+	va_list list;
+	char *str = NULL;
+	int i = 0, retval = 0;
 
-	len = buffer_len(format, args);
-	printf("Buffer len: %d\n", len);
+	va_start(list, format);
 
-	va_start(args, format);
-
-	buffer = malloc(sizeof(char) * len);
-
-	if (buffer == NULL)
-		return (-1);
-
-	for (i = 0; i < len + 1; i++)
-	{
+	while (format && format[i])
+	{	
 		if (format[i] == '%')
 		{
 			i++;
 			switch (format[i])
 			{
 				case 's':
-					str = va_arg(args, char *);
-
-					for (j = 0; str[j] != '\0'; j++)
+					str = va_arg(list, char *);
+					if (str == NULL)
 					{
-						buffer[i] = str[j];
-						i++;
+						return (i);
 					}
-					break;
-				case 'c':
-					buffer[i] = va_arg(args, int);
-					break;
+					retval += print_str(str);
+					i++;
+				break;
 				case '%':
-					buffer[i] = '%';
-					break;
+					retval += _putchar('%');
+					i++;
+				break;
 			}
 		}
-		else 
-			buffer[i] = format[i];
+		_putchar(format[i]);
+		i++;
+		retval++;
 	}
-	write(1, buffer, len);
-	free(buffer);
-	return (len);
+
+	va_end(list);
+
+	return (retval);
 }

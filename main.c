@@ -3,16 +3,14 @@
 
 int main(void)
 {
-    int len;
-
-    len = _printf("Let's try to printf: %c\n", 'H');
-    printf("Length: %d\n", len);
-
-    len = _printf("And some more: %s\n", "This is a string");
-    printf("Length: %d\n", len);
+    int len = 0;
+    int len1 = 0;
 
     len = _printf("%% and %s\n", "This is another string");
     printf("Length: %d\n", len);
+
+    len1 = printf("%% and %s\n", "This is another string");
+    printf("Length: %d\n", len1);
 
     return (0);
 }

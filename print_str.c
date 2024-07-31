@@ -11,15 +11,14 @@ int print_str(char *c)
 {
 	int i = 0;
 
-	str = c;
+	if (c == NULL)
+		return (0);
 
-	if (str == NULL)
-		str = "(nil)";
-
-	while (str[i] != '\0')
+	while (c[i] != '\0')
 	{
-		_putchar(str[i]);
+		_putchar(c[i]);
 		i++;
 	}
+	
 	return (i);
 }
