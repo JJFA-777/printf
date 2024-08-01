@@ -13,22 +13,39 @@ int _printf(const char *format, ...)
 	va_list list;
 	int i = 0, retval = 0;
 
+	int (*get_sp_fun)(va_list list);
+
+	if (!format)
+		return (-1);
+
 	va_start(list, format);
 
 	while (format && format[i])
-	{	
+	{
 		if (format[i] == '%')
 		{
 			i++;
-			retval += specifier_functions(format[i], list);
-			i++;
+			if (format[i] == '\0')
+				break;
+			get_sp_fun = specifier_functions(format[i]);
+			if (get_sp_fun != NULL)
+			{
+				retval += get_sp_fun(list);
+			}
+			else
+			{
+				_putchar('%');
+				_putchar(format[i]);
+				retval += 2;
+			}
 		}
-		_putchar(format[i]);
+		else
+		{
+			_putchar(format[i]);
+			retval++;
+		}
 		i++;
-		retval++;
 	}
-
 	va_end(list);
-
 	return (retval);
 }

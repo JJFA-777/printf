@@ -7,8 +7,12 @@
  * Return: len of char.
  */
 
-int print_char(char c)
+int print_char(va_list list)
 {
+	char c;
+
+	c = va_arg(list, int);
 	_putchar(c);
 	return (1);
+
 }

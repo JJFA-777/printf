@@ -6,7 +6,7 @@
  *Return: Length of characters printed.
  */
 
-int print_num(va_list list)
+int print_d(va_list list)
 {
 	int o_num;
 	int p_ten;
@@ -24,7 +24,7 @@ int print_num(va_list list)
 	}
 
 	else
-		abs_n = o_num;
+		abs_num = o_num;
 
 	while (abs_num / p_ten > 9)
 	{

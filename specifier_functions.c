@@ -7,7 +7,7 @@
 *Return: void.
 */
 
-void (*specifier_functions)(const char c, va_list args)
+int (*specifier_functions(char c))(va_list args)
 {
 	int i = 0;
 
@@ -15,18 +15,17 @@ void (*specifier_functions)(const char c, va_list args)
 		{'c', print_char},
 		{'s', print_str},
 		{'%', print_perc},
-		{'d', print_num},
+		{'d', print_d},
 		{'i', print_i},
 		{'\0', NULL}
 	};
 
-	for (i = 0; p_func[i] < '\0'; i++)
+	for (i = 0; p_func[i].c < '\0'; i++)
 	{
 			if (c == p_func[i].c)
 			{
-					p_func[i].print_func(args);
-					break;
+				return (p_func[i].print_func);
 			}
 	}
-	
+	return (NULL);
 }
