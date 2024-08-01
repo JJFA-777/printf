@@ -6,9 +6,10 @@
  * Return: 1.
  */
 
-int print_perc(__attribute__((unsused))va_list list)
+int print_perc(va_list list)
 {
-	_putchar('%');
-	return (1)
+	char c = va_arg(list, int);
+	_putchar(c);
+	return (1);
 }
 

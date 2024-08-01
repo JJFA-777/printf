@@ -1,51 +1,67 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
- * _printf - print anything to stdout.
- * @format: data to be printed.
+ *_printf - Prints formatted input to the standard output.
+ *@format: character string.
  *
- * Return: number of characters printed.
+ * Return: No return value.
  */
 
 int _printf(const char *format, ...)
 {
 	va_list list;
-	int i = 0, retval = 0;
+	unsigned int i;
+	int b = 0;
+	int str_i;
 
-	int (*get_sp_fun)(va_list list);
-
-	if (!format)
+	if (format == NULL)
 		return (-1);
 
 	va_start(list, format);
 
-	while (format && format[i])
+	for (i = 0; format[i] != '\0'; i++)
 	{
-		if (format[i] == '%')
+		if (format[i] != '%')
 		{
-			i++;
-			if (format[i] == '\0')
-				break;
-			get_sp_fun = specifier_functions(format[i]);
-			if (get_sp_fun != NULL)
-			{
-				retval += get_sp_fun(list);
-			}
-			else
-			{
-				_putchar('%');
-				_putchar(format[i]);
-				retval += 2;
-			}
+			_putchar(format[i]);
+			b++;
 		}
 		else
 		{
-			_putchar(format[i]);
-			retval++;
+			if (format[i + 1] == 'c')
+			{
+				i += print_char(list);
+				b++;
+			}
+			if (format[i + 1] == 's')
+			{
+				str_i = print_str(list);
+				i++;
+				b += (str_i - 1);
+			}
+			if (format[i + 1] == '%')
+			{
+				_putchar('%');
+				b++;
+			}
+			if (format[i + 1] == 'd'|| format[i +1] == 'i')
+			{
+				i++;
+				b += print_d(list);
+			}
+			if (format[i + 1] == 'u')
+			{
+				i++;
+				b += print_unsigned_int(list);
+			}
+			if (format[i + 1] == 'b')
+			{
+				i++;
+				b += print_binary(list);
+			}
 		}
-		i++;
 	}
-	va_end(list);
-	return (retval);
+
+	return (b);
 }
+

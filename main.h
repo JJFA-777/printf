@@ -14,12 +14,16 @@ int print_d(va_list list);
 int print_str(va_list list);
 int print_char(va_list list);
 int print_perc(va_list list);
+int print_binary(va_list list);
+int print_num(va_list list);
+int print_unsigned_int(va_list list);
+
 
 typedef struct p_func{
 		char c;
 		int (*print_func)(va_list args);
 		} p_func_t;
 
-int (*specifier_functions(char c))(va_list list);
+int (*sp_fun(char c))(va_list list);
 
 #endif /*MAIN_H*/
